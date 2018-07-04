@@ -8,29 +8,32 @@ use PHPUnit\Framework\TestCase;
 class CartTest extends TestCase
 {
 
-    public function tsetUpdateQuantitiesAndHetTotal()
+    /**
+     * @dataProvider provider
+     */
+    public function testUpdateQuantitiesAndHetTotal($quantities, $expected)
     {
         $cart = new Cart();
 
-        // Test 1
-        $quantities = [
-            1, 0, 0, 0, 0, 0,
-        ];
         $cart->updateQuantities($quantities);
-        $this->assertEquals(199, $cart->getTotal());
-
-        // Test 2
-        $quantities = [
-            1, 0, 0, 2, 0, 0,
-        ];
-        $cart->updateQuantities($quantities);
-        $this->assertEquals(797, $cart->getTotal());
+        $this->assertEquals($expected, $cart->getTotal());
 
         return $cart;
     }
 
+    public function provider(){
+        return array(
+            array(
+                array(1,0,0,0,0,0),199
+            ),
+            array(
+                array(1,00,2,0,0),797
+            )
+        );
+    }
+
     /**
-     * @depends tsetUpdateQuantitiesAndHetTotal
+     * @depends testUpdateQuantitiesAndHetTotal
      */
     public function testGetProducts($cart)
     {
