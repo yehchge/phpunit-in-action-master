@@ -7,7 +7,8 @@ use PHPUnit\Framework\TestCase;
 
 class CartTest extends TestCase
 {
-    public function testCart()
+
+    public function tsetUpdateQuantitiesAndHetTotal()
     {
         $cart = new Cart();
 
@@ -24,8 +25,12 @@ class CartTest extends TestCase
         ];
         $cart->updateQuantities($quantities);
         $this->assertEquals(797, $cart->getTotal());
+    }
 
-        // Test 3
+
+    public function testGetProducts()
+    {
+        $cart = new Cart();
         $products = $cart->getProducts();
         $this->assertEquals(6, count($products));
         $this->assertEquals(2, $products[3]['quantity']);

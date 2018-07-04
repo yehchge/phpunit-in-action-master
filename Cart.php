@@ -73,31 +73,3 @@ class Cart
         return ['products', 'total'];
     }
 }
-
-// 測試碼
-if (isset($argv[1]) && 'debug' === strtolower($argv[1])) {
-
-    $cart = new Cart();
-
-    // Test 1
-    $quantities = [
-        1, 0, 0, 0, 0, 0,
-    ];
-    $cart->updateQuantities($quantities);
-    if (199 !== $cart->getTotal()) {
-        echo "Test 1 failed!\n";
-    } else {
-        echo "Test 1 OK!\n";
-    }
-
-    // Test 2
-    $quantities = [
-        1, 0, 0, 2, 0, 0,
-    ];
-    $cart->updateQuantities($quantities);
-    if (797 !== $cart->getTotal()) {
-        echo "Test 2 failed!\n";
-    } else {
-        echo "Test 2 OK!\n";
-    }
-}
