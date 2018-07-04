@@ -25,12 +25,15 @@ class CartTest extends TestCase
         ];
         $cart->updateQuantities($quantities);
         $this->assertEquals(797, $cart->getTotal());
+
+        return $cart;
     }
 
-
-    public function testGetProducts()
+    /**
+     * @depends tsetUpdateQuantitiesAndHetTotal
+     */
+    public function testGetProducts($cart)
     {
-        $cart = new Cart();
         $products = $cart->getProducts();
         $this->assertEquals(6, count($products));
         $this->assertEquals(2, $products[3]['quantity']);
