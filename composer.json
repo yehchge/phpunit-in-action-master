@@ -1,0 +1,8 @@
+{
+    "name": "bill/phpunit-in-action-master",
+    "type": "project",
+    "minimum-stability": "stable",
+    "require": {
+        "phpunit/phpunit": "^6.5"
+    }
+}
