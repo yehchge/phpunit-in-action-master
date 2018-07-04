@@ -10,6 +10,7 @@ class CartTest extends TestCase
 
     /**
      * @dataProvider provider
+     * @group update
      */
     public function testUpdateQuantitiesAndHetTotal($quantities, $expected)
     {
@@ -29,6 +30,9 @@ class CartTest extends TestCase
         );
     }
 
+    /**
+     * @group get
+     */
     public function testGetProducts()
     {
         $cart = new Cart();
@@ -39,6 +43,8 @@ class CartTest extends TestCase
 
     /**
      * @expectedException CartException
+     * @group update
+     * @group exception
      */
     public function testUpdateQuantitieWithExcetion()
     {
