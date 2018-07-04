@@ -8,15 +8,26 @@ use PHPUnit\Framework\TestCase;
 class CartTest extends TestCase
 {
 
+    private $cart = null;
+
+    public function setUp()
+    {
+        $this->cart = new Cart();
+    }
+
+    public function tearDown()
+    {
+        $this->cart = null;
+    }
+
     /**
      * @dataProvider provider
      * @group update
      */
     public function testUpdateQuantitiesAndHetTotal($quantities, $expected)
     {
-        $cart = new Cart();
-        $cart->updateQuantities($quantities);
-        $this->assertEquals($expected, $cart->getTotal());
+        $this->cart->updateQuantities($quantities);
+        $this->assertEquals($expected, $this->cart->getTotal());
     }
 
     public function provider(){
@@ -31,25 +42,25 @@ class CartTest extends TestCase
     }
 
     /**
-     * @group get
-     */
-    public function testGetProducts()
-    {
-        $cart = new Cart();
-        $products = $cart->getProducts();
-        $this->assertEquals(6, count($products));
-        $this->assertEquals(0, $products[3]['quantity']);
-    }
-
-    /**
      * @expectedException CartException
      * @group update
      * @group exception
      */
     public function testUpdateQuantitieWithExcetion()
     {
-        $cart = new Cart();
         $quantities = [ -1, 0, 0, 0, 0, 0];
-        $cart->updateQuantities($quantities); // 預期會產生一個 Exception
+        $this->cart->updateQuantities($quantities); // 預期會產生一個 Exception
     }
+
+    /**
+     * @group get
+     */
+    public function testGetProducts()
+    {
+        $products = $this->cart->getProducts();
+        $this->assertEquals(6, count($products));
+        $this->assertEquals(0, $products[3]['quantity']);
+    }
+
+
 }
