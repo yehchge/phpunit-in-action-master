@@ -36,4 +36,14 @@ class CartTest extends TestCase
         $this->assertEquals(6, count($products));
         $this->assertEquals(0, $products[3]['quantity']);
     }
+
+    /**
+     * @expectedException CartException
+     */
+    public function testUpdateQuantitieWithExcetion()
+    {
+        $cart = new Cart();
+        $quantities = [ -1, 0, 0, 0, 0, 0];
+        $cart->updateQuantities($quantities); // 預期會產生一個 Exception
+    }
 }
